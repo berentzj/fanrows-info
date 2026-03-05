@@ -2,7 +2,7 @@
 
 ⚠️ The FanRows source code is currently not publicly available. This repository documents the system architecture and interaction model.
 
-## Continuous Embodied Audio Interaction in the Browser**
+## Continuous Embodied Audio Interaction in the Browser
 
 FanRows is an experimental system for embodied interaction with sound environments.
 
@@ -71,27 +71,42 @@ FanRows combines:
 # Core Idea
 
 Most interactive music systems follow an event-based model:
-
-**gesture → trigger → sound**
+```mermaid
+flowchart LR
+A[Gesture] --> B[Trigger] --> C[Sound]
+```
 
 FanRows instead uses continuous regulation:
-
-**motion features → regulation → sound field modulation**
+```mermaid
+flowchart LR
+A[Motion Features] --> B[Regulation] --> C[Sound Field Modulation]
+```
 
 Movement does not execute commands. Movement modifies the conditions of the sound environment.
 
 ---
 
-# Interaction Model
+# Interaction Feedback Loop
 
 FanRows operates as a closed feedback loop:
 
-body movement  
-→ motion analysis  
-→ state regulation  
-→ audio environment  
-→ perception  
-→ movement adaptation
+```mermaid
+flowchart LR
+
+A[Body Movement]
+B[Motion Analysis]
+C[State Regulation]
+D[Sound Environment]
+E[Auditory Perception]
+F[Movement Adaptation]
+
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+F --> A
+```
 
 The user becomes part of a dynamic system where motion and sound continuously influence each other.
 

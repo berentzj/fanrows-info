@@ -55,11 +55,7 @@ Learn more at:
 
 ## What FanRows Is
 
-FanRows is a browser-based system for continuous embodied audio interaction.
-
-Rather than treating gestures as discrete commands, FanRows interprets body motion as continuous signals that gradually reshape a sonic environment.
-
-The result is an evolving sound space that reacts to posture, movement intensity, stability, and sustained spatial configurations.
+FanRows is a browser-based system for continuous embodied audio interaction. Rather than treating gestures as discrete commands, FanRows interprets body motion as continuous signals that gradually reshape a sonic environment. The result is an evolving sound space that reacts to posture, movement intensity, stability, and sustained spatial configurations.
 
 FanRows combines:
 
@@ -74,15 +70,13 @@ FanRows combines:
 
 Most interactive music systems follow an event-based model:
 
-gesture → trigger → sound
+**gesture → trigger → sound**
 
 FanRows instead uses continuous regulation:
 
-motion features → regulation → sound field modulation
+**motion features → regulation → sound field modulation**
 
-Movement does not execute commands.
-
-Movement modifies the conditions of the sound environment.
+Movement does not execute commands. Movement modifies the conditions of the sound environment.
 
 ---
 
@@ -90,27 +84,7 @@ Movement modifies the conditions of the sound environment.
 
 FanRows operates as a closed feedback loop:
 
-body movement
-
-↓
-
-motion analysis
-
-↓
-
-state regulation
-
-↓
-
-audio environment
-
-↓
-
-perception
-
-↓
-
-movement adaptation
+body movement -> motion analysis -> state regulation -> audio environment -> perception -> movement adaptation
 
 The user becomes part of a dynamic system where motion and sound continuously influence each other.
 
@@ -346,42 +320,208 @@ User raises arm
 
 **JSON Configuration Schema**
 
-Example configuration structure:
+Example configuration structure for a session:
 
 ```
 {
-  "stackName": "Example Session",
-  "stackBpm": 120,
-  "scenes": [
-    {
-      "sceneId": "ambient",
-      "loops": [
-        {
-          "id": "pad",
-          "file": "/audio/pad.ogg",
-          "fadeInTime": 2,
-          "fadeOutTime": 2
-        }
-      ]
-    }
-  ]
-}
-```
+  "stackName": "Echo Chamber",
+  "stackBpm": "78",
+  "globalSceneSwitchPose": {
+    "pose": "armsCrossed",
+    "holdTime": 1300,
+    "graceMs": 250,
+    "cooldownMs": 1300
+  },
 
-Example Session
-```
-{
-  "stackName": "Embodied Sound Space",
-  "stackBpm": 124,
+  "visual": {
+    "imageBasePath": "/posePreviews/butoh/",
+    "mode": "both",
+    "background": "video",
+    "backgroundSource": "/posePreviews/butoh/background-lake.mp4",
+    "headless": false,
+
+    "pointSize": 6,
+    "lineWidth": 5,
+    "jointColor": "rgba(75,75,120,0.7)",
+    "boneColor": "rgba(75,75,120,0.5)",
+    "maskColor": "rgba(200,200,200,0.7)",
+
+    "drawTorso": false,
+    "bodyFillColor": "rgba(175,75,200,0.55)",
+
+    "drawFace": true,
+    "faceStyle": "butoh",
+    "faceColor": "rgba(230,230,255,0.5)",
+    "drawPose": true,
+    "drawHands": true
+  },
+
   "scenes": [
+
     {
-      "sceneId": "ambient",
-      "loops": [
-        {
-          "id": "drone",
-          "file": "/loops/drone.ogg"
+      "id": "birth",
+      "name": "Birth from stillness",
+      "poseGuide": "/posePreviews/butoh/trainer.mp4",
+      "background": {
+        "type": "video",
+        "src": "/posePreviews/butoh/background-lake.mp4"
+      },
+      "visualConfig": {
+        "sceneText": {
+          "content": "Follow the motion of the guide\n in the small window.",
+          "fadeIn": 3.0,
+          "hold": 10.0,
+          "fadeOut": 2.0,
+          "color": "rgba(0,0,64,0.85)",
+          "fontSize": 38,
+          "fontFamily": "times",
+          "fontWeight": "normal",
+          "align": "left",
+          "position": "top"
         }
-      ]
+      },
+      "angleEffectMappings": [
+        {
+          "joint": "leftShoulderAngle",
+          "loop": "birth_base",
+          "target": "reverb.wet",
+          "min": 0,
+          "max": 1
+        },
+        {
+          "joint": "rightShoulderAngle",
+          "loop": "ambient-leftArmVShapeDown",
+          "target": "pan.pan",
+          "min": -1,
+          "max": 1
+        }
+      ],
+      "loops": {
+        "birth_base": {
+          "file": "/splice/Piano/BPE_120_piano_loop_walk_Cmin.ogg",
+          "type": "loop",
+          "autoRun": true,
+          "autoMute": true,
+          "fadeInTime": 1.0,
+          "fadeOutTime": 10.0
+        },
+        "birth_rightHandAboveHead": {
+          "file": "/splice/Piano/SC_IP_piano_grand_arp_ascending_Cmin.ogg",
+          "pose": "rightHandAboveHead",
+          "type": "oneShot"
+        },
+        "birth_leftHandAboveHead": {
+          "file": "/splice/Piano/BPM140_Cm_Gloomy_Piano.ogg",
+          "pose": "leftHandAboveHead",
+          "type": "oneShot"
+        },
+        "birth_rightArmTShape": {
+          "file": "/splice/Piano/BPE_piano_deer_Cmin.ogg",
+          "pose": "rightArmTShape",
+          "type": "oneShot"
+        },
+        "birth_leftArmTShape": {
+          "file": "/splice/Piano/BPE_piano_fall_Cmin.ogg",
+          "pose": "leftArmTShape",
+          "type": "oneShot"
+        }
+      }
+    },
+
+    {
+      "id": "body",
+      "name": "Recognition of body and breath",
+      "background": {
+        "type": "video",
+        "src": "/posePreviews/butoh/background-birds.mp4"
+      },
+      "visualConfig": {
+        "sceneText": {
+          "content": "Now you are on your own.",
+          "fadeIn": 3.0,
+          "hold": 10.0,
+          "fadeOut": 2.0,
+          "color": "rgba(0,0,64,0.85)",
+          "fontSize": 38,
+          "fontFamily": "times",
+          "fontWeight": "normal",
+          "align": "left",
+          "position": "top"
+        }
+      },
+      "loops": {
+        "body_base": {
+          "file": "/splice/Piano/SC_IP_60_piano_grand_arrangement_romantico_pt_c_Ebmaj.ogg",
+          "type": "loop",
+          "autoRun": true,
+          "autoMute": true,
+          "fadeInTime": 1.0,
+          "fadeOutTime": 10.0
+        },
+        "body_rightHandAboveHead": {
+          "file": "/splice/Cello/PJ_PPLII_Strings_one_shot_Rising_Cello_Ensemble_Chord_Dsmaj.ogg",
+          "pose": "rightHandAboveHead",
+          "type": "oneShot"
+        },
+        "body_leftHandAboveHead": {
+          "file": "/splice/Strings/SLS_ES_synth_pad_string_strum_layered_long_chord_loving_you_Ebmaj7.ogg",
+          "pose": "leftHandAboveHead",
+          "type": "oneShot"
+        },
+        "body_rightArmTShape": {
+          "file": "/splice/Flute/SO_AA_113_flute_love_Ebmaj.ogg",
+          "pose": "rightArmTShape",
+          "type": "loop",
+          "fadeInTime": 1.2,
+          "fadeOutTime": 10.0
+        },
+        "body_leftArmTShape": {
+          "file": "/splice/Flute/SO_TA_102_synth_flute_cabo_Ebmaj.ogg",
+          "pose": "leftArmTShape",
+          "type": "loop",
+          "fadeInTime": 1.2,
+          "fadeOutTime": 10.0
+        }
+      }
+    },
+
+    {
+      "id": "release",
+      "name": "Release and transformation",
+      "background": {
+        "type": "video",
+        "src": "/posePreviews/butoh/background-sun.mp4"
+      },
+      "loops": {
+        "release_base": {
+          "file": "/splice/Piano/SC_IP_120_piano_grand_arrangement_lucid_chords_two_Cmin.ogg",
+          "type": "loop",
+          "autoRun": true,
+          "autoMute": true,
+          "fadeInTime": 1.0,
+          "fadeOutTime": 10.0
+        },
+        "release_rightHandAboveHead": {
+          "file": "/splice/Vocals/SS_VMT_124_vocal_reflex_adlib_long_reverb_Cmin.ogg",
+          "pose": "rightHandAboveHead",
+          "type": "oneShot"
+        },
+        "release_leftHandAboveHead": {
+          "file": "/splice/Vocals/SS_VMT_124_vocal_sacrifice_chorus_adlibs_wet_Fmin.ogg",
+          "pose": "leftHandAboveHead",
+          "type": "oneShot"
+        },
+        "release_rightArmTShape": {
+          "file": "/splice/Strings/MNT_SDHJ_90_strings_violin_legato_intro_alt_wet_Cm.ogg",
+          "pose": "rightArmTShape",
+          "type": "oneShot"
+        },
+        "release_leftArmTShape": {
+          "file": "/splice/Strings/MNT_TOG_80_violin_texture_intimate_tremolo_swells_wet_Cm.ogg",
+          "pose": "leftArmTShape",
+          "type": "oneShot"
+        }
+      }
     }
   ]
 }
@@ -401,8 +541,5 @@ Planned directions include:
 **License**
 
 FanRows is currently released as a research prototype.
-
 The source code is not publicly released at this stage.
-
 This repository documents the system architecture and interaction model.
-

@@ -286,39 +286,190 @@ Transitions typically depend on pose persistence, stability thresholds, and temp
 
 ## Mapping System
 
-Mappings define how motion features influence sound parameters.
+FanRows connects motion features with audio parameters through a flexible mapping system.
+Mappings translate continuous motion signals into changes in the sound environment.
 
-| Motion Feature	 | Audio Parameter         |
-|------------------|-------------------------|
-|velocity	         | filter cutoff           |
-|pose	             | activate loop layer     |
-|stability	       | reverb size             |
-|limb angle	       | pitch modulation        |
+### Mapping Types
+
+FanRows supports several categories of motion-to-audio mappings:
+
+| Mapping Type | Description |
+|--------------|-------------|
+| Pose Mapping | discrete pose detection triggers |
+| Angle Mapping | continuous joint angle control |
+| Velocity Mapping | movement speed modulation |
+| Stability Mapping | posture stability modulation |
+| Cue Mapping | temporal modulation patterns |
+
+### Continuous Mapping
 
 Mappings operate continuously rather than through discrete triggers.
+Example mapping:
+
+velocity → filter cutoff  
+stability → reverb size  
+arm angle → stereo pan
 
 ## Effect System
 
-FanRows supports:
+The FanRows effect system allows continuous modulation of audio parameters in response to body motion features.
+Rather than applying static effects to audio signals, FanRows treats effect parameters as continuously regulated variables within the interaction loop.
+Effects therefore become part of the dynamic sound field rather than fixed signal processors.
+The system supports several layers of effect control.
 
-- global effects
-- per-layer effects
-- dynamic modulation
+---
 
-Examples include:
+### Effect Layers
 
-- filter frequency
-- reverb wet level
-- chorus depth
-- delay feedback
+Effects can be applied at multiple levels of the audio architecture.
 
-## Cue Engine
+| Level | Description |
+|------|-------------|
+| Global FX | Effects applied to the entire sound environment |
+| Per-Loop FX | Effects applied to individual loop layers |
+| Parameter Modulation | Continuous modulation of effect parameters |
+| Cue Engine | Temporal variation and evolving modulation patterns |
 
-The Cue Engine introduces controlled temporal variation, such as:
+This layered approach allows the sound environment to evolve smoothly without interrupting playback.
 
-- slow parameter drift
-- probabilistic modulation
-- evolving scene conditions
+---
+
+### Global Effects
+
+Global effects influence the entire sound environment.
+
+Typical global effects include:
+
+- global reverb
+- global filtering
+- spatial widening
+- master modulation effects
+
+These effects help define the overall acoustic character of the sound field.
+
+Example parameters:
+
+- reverb.wet
+- filter.frequency
+- chorus.depth
+- pitchShift.pitch
+
+Global effects are typically modulated slowly in order to preserve perceptual stability.
+
+---
+
+### Per-Loop Effects
+
+Each audio layer can have its own effect chain.
+This allows individual sound layers to react differently to motion features.
+
+Examples:
+
+- pad layers may respond to arm angles
+- air textures may respond to velocity
+- drone layers may respond to posture stability
+
+Example per-loop modulation:
+
+velocity → filter cutoff
+arm angle → stereo pan
+stability → reverb amount
+
+Because loops remain continuously playing, these modulations occur without retriggering the audio source.
+
+---
+
+### Continuous Parameter Modulation
+
+Effect parameters are controlled by normalized motion features.
+Each mapping converts a motion feature into a parameter range.
+
+Example mapping:
+
+velocity → filter.frequency (200Hz – 3000Hz)
+
+This means that faster body movement gradually increases the brightness of the sound environment.
+Parameter mappings typically include:
+
+| Property | Description |
+|--------|-------------|
+|min | lower bound of parameter |
+|max | upper bound of parameter |
+|smoothing | optional parameter smoothing |
+|target | effect parameter being controlled |
+
+Example configuration:
+
+```json
+{
+  "joint": "leftShoulderAngle",
+  "loop": "birth_base",
+  "target": "reverb.wet",
+  "min": 0,
+  "max": 1
+}
+```
+
+This maps a shoulder angle to the wet level of the reverb applied to a specific loop.
+
+### Effect Targets
+
+The effect system can address many parameters inside the audio engine.
+Typical targets include:
+
+- filter.frequency
+- reverb.wet
+- chorus.depth
+- delay.feedback
+- pitchShift.pitch
+- pan.pan
+- gain.volume
+
+These targets correspond to parameters within the Tone.js signal graph.
+
+### Cue Engine
+
+The Cue Engine introduces temporal variation into the effect system.
+Instead of mapping motion directly to a parameter, the Cue Engine can generate evolving parameter states.
+Typical uses include:
+
+- slow atmospheric drift
+- probabilistic parameter changes
+- scene-dependent modulation patterns
+
+This enables the sound environment to evolve even during periods of minimal movement.
+
+## Regulation of Effect Changes
+
+Because FanRows is based on continuous interaction, effect changes are typically smoothed over time.
+Mechanisms include:
+
+- parameter interpolation
+- temporal smoothing
+- persistence thresholds
+
+This prevents abrupt sonic transitions and maintains perceptual coherence.
+
+## Role in the Interaction Loop
+
+Within the FanRows architecture, the effect system acts as the primary interface between motion features and the sound environment.
+
+```mermaid
+flowchart TD
+
+A[Motion Features]
+B[Effect Modulation]
+C[Sound Field Evolution]
+
+A --> B
+B --> C
+```
+
+Rather than triggering sounds, the user continuously reshapes the acoustic properties of the environment.
+
+This design allows the sound field to behave as a dynamic system that gradually reorganizes in response to embodied interaction.
+
+---
 
 ## Visual System
 

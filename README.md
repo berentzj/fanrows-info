@@ -185,7 +185,7 @@ Example feature vector:
 | posturePersistence | duration a posture is maintained     |
 
 **Joint angles**
-| Feature				     | Meaning
+| Feature				     | Meaning                              |
 |--------------------|--------------------------------------|
 | rightArmAngle		   | normalized shoulder angle            |
 | leftArmAngle		   | normalized shoulder angle            |
@@ -208,7 +208,7 @@ Example feature vector:
 
 Together these features define a multidimensional motion state space used by the regulation layer.
 
-**Regulation Layer**
+## Regulation Layer
 
 The regulation layer converts motion features into stable interaction states.
 Instead of reacting instantly to motion, the system evaluates:
@@ -384,14 +384,24 @@ FanRows is implemented entirely in the browser.
 | Runtime          | JavaScript              |
 | Configuration    | JSON                    |
 
-Example Interaction Flow:
+## Example Interaction Flow
 
-User raises arm
-→ Pose detection extracts joint angles
-→ Regulation layer detects sustained pose
-→ Scene mapping activates sound layer
-→ Audio engine modulates loop gain
-→ Sound environment evolves
+```mermaid
+flowchart LR
+
+A[User raises arm]
+B[Pose detection extracts joint angles]
+C[Regulation layer detects sustained pose]
+D[Scene mapping activates sound layer]
+E[Audio engine modulates loop gain]
+F[Sound environment evolves]
+
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+```
 
 ## JSON Configuration Schema
 

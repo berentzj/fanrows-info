@@ -125,11 +125,63 @@ Example feature vector:
 ```json
 {
   "velocity": 0.42,
+  "acceleration": 0.18,
+  "movementIntensity": 0.36,
+
   "stability": 0.73,
+  "posturePersistence": 0.64,
+
   "rightArmAngle": 0.58,
-  "leftArmAngle": 0.12
+  "leftArmAngle": 0.12,
+  "rightElbowAngle": 0.47,
+  "leftElbowAngle": 0.39,
+
+  "shoulderWidth": 0.51,
+  "bodyOrientation": 0.22,
+
+  "handDistance": 0.34,
+  "handHeight": 0.66,
+
+  "centerX": 0.53,
+  "centerY": 0.41,
+
+  "poseConfidence": 0.92
 }
 ```
+
+**Motion dynamics**
+| Feature				     | Meaning                              |
+|--------------------|--------------------------------------|
+| velocity			 	   | instantaneous body movement velocity |
+| acceleration		   | change of movement velocity          |
+| movementIntensity  | normalized motion energy             |
+
+**Posture stability**
+| Feature				     | Meaning                              |
+|--------------------|--------------------------------------|
+| stability				   | posture stability over time          |
+| posturePersistence | duration a posture is maintained     |
+
+**Joint angles**
+| Feature				     | Meaning
+|--------------------|--------------------------------------|
+| rightArmAngle		   | normalized shoulder angle            |
+| leftArmAngle		   | normalized shoulder angle            |
+| rightElbowAngle	   | elbow articulation                   |
+| leftElbowAngle	   | elbow articulation                   |
+
+**Spatial features**
+| Feature			       |	Meaning                             |
+|--------------------|--------------------------------------|
+| centerX			       | body center horizontal position      |
+| centerY			       | body center vertical position        |
+| handDistance       |	distance between hands              |
+| handHeight	       |	vertical hand position              |
+
+**Tracking confidence**
+| Feature				     | Meaning                              |
+|--------------------|--------------------------------------|
+| poseConfidence     | MediaPipe tracking confidence        |
 
 These features define a continuous motion state space.
 

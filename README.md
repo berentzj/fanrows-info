@@ -1,12 +1,14 @@
 # FanRows
 
-**Continuous Embodied Audio Interaction in the Browser**
+⚠️ The FanRows source code is currently not publicly available. This repository documents the system architecture and interaction model.
+
+## Continuous Embodied Audio Interaction in the Browser**
 
 FanRows is an experimental system for embodied interaction with sound environments.
 
 Instead of triggering sounds through discrete gestures, FanRows continuously regulates a layered sound environment based on body posture, motion dynamics, and stability.
 
-The system combines:
+The system integrates the following components:
 
 - webcam-based pose tracking
 - continuous motion feature extraction
@@ -84,7 +86,12 @@ Movement does not execute commands. Movement modifies the conditions of the soun
 
 FanRows operates as a closed feedback loop:
 
-body movement -> motion analysis -> state regulation -> audio environment -> perception -> movement adaptation
+body movement  
+→ motion analysis  
+→ state regulation  
+→ audio environment  
+→ perception  
+→ movement adaptation
 
 The user becomes part of a dynamic system where motion and sound continuously influence each other.
 
@@ -183,7 +190,8 @@ Example feature vector:
 |--------------------|--------------------------------------|
 | poseConfidence     | MediaPipe tracking confidence        |
 
-These features define a continuous motion state space.
+
+Together these features define a multidimensional motion state space used by the regulation layer.
 
 **Regulation Layer**
 
@@ -203,7 +211,7 @@ if pose detected for > holdTime
 
 This prevents unstable triggers and enables smooth interaction dynamics.
 
-**Audio Engine**
+## Audio Engine
 
 The audio engine uses a layered sound architecture. Multiple loops run simultaneously and remain synchronized.
 
@@ -230,7 +238,7 @@ Advantages:
 - no timing drift
 - no playback artifacts
 
-**Scene System**
+## Scene System
 
 Interaction environments are structured into sessions and scenes.
 
@@ -251,7 +259,7 @@ A scene defines:
 
 Scenes represent bounded interaction contexts.
 
-**Scene Transitions**
+## Scene Transitions
 
 Scene transitions occur when sustained body states are detected.
 
@@ -261,7 +269,7 @@ arms crossed → switch scene
 
 Transitions typically depend on pose persistence, stability thresholds, and temporal windows.
 
-**Mapping System**
+## Mapping System
 
 Mappings define how motion features influence sound parameters.
 
@@ -274,7 +282,7 @@ Mappings define how motion features influence sound parameters.
 
 Mappings operate continuously rather than through discrete triggers.
 
-**Effect System**
+## Effect System
 
 FanRows supports:
 
@@ -289,7 +297,7 @@ Examples include:
 - chorus depth
 - delay feedback
 
-**Cue Engine**
+## Cue Engine
 
 The Cue Engine introduces controlled temporal variation, such as:
 
@@ -297,7 +305,7 @@ The Cue Engine introduces controlled temporal variation, such as:
 - probabilistic modulation
 - evolving scene conditions
 
-**Visual System**
+## Visual System
 
 FanRows includes a visual feedback layer. Possible visual elements:
 
@@ -307,7 +315,7 @@ FanRows includes a visual feedback layer. Possible visual elements:
 
 Visual feedback helps users understand the relationship between movement and sound response.
 
-**Configuration System**
+## Configuration System
 
 All interaction environments are defined through JSON configuration files.
 
@@ -322,7 +330,7 @@ Configuration defines:
 
 This enables reproducible interaction environments.
 
-**Studio Environment**
+## Studio Environment
 
 The Studio interface provides tools to:
 
@@ -333,7 +341,7 @@ The Studio interface provides tools to:
 
 Studio functions as a development environment for interaction sessions.
 
-**External Integration**
+## External Integration
 
 Future versions will expose motion features to external systems.
 
@@ -350,7 +358,7 @@ Possible integrations:
 - Unity
 - Max/MSP
 
-**Technical Architecture**
+## Technical Architecture
 
 FanRows is implemented entirely in the browser.
 
@@ -370,11 +378,11 @@ User raises arm
 → Audio engine modulates loop gain
 → Sound environment evolves
 
-**JSON Configuration Schema**
+## JSON Configuration Schema
 
 Example configuration structure for a session:
 
-```
+```json
 {
   "stackName": "Echo Chamber",
   "stackBpm": "78",
@@ -579,7 +587,7 @@ Example configuration structure for a session:
 }
 ```
 
-**Future Development**
+## Future Development
 
 Planned directions include:
 
@@ -590,7 +598,7 @@ Planned directions include:
 - embodied interaction API
 - research data analysis tools
 
-**License**
+## License
 
 FanRows is currently released as a research prototype.
 The source code is not publicly released at this stage.

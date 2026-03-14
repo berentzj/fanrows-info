@@ -2,6 +2,16 @@
 
 ⚠️ The FanRows source code is currently not publicly available. This repository documents the system architecture and interaction model.
 
+## Overview
+
+FanRows is an experimental browser-based system for embodied interaction with sound environments.
+
+Using webcam-based motion tracking, body posture and movement dynamics continuously regulate a layered sound environment.
+
+Instead of triggering sounds through discrete gestures, participants navigate and reshape an evolving sonic space through sustained body motion.
+
+The project explores how continuous body–sound coupling can enable new forms of musical interaction and embodied exploration.
+
 ## Continuous Embodied Audio Interaction in the Browser
 
 FanRows is an experimental system for embodied interaction with sound environments.

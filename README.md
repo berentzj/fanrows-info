@@ -1,5 +1,12 @@
 # FanRows
 
+## Project Website
+Learn more at:  
+**Website: https://fanrows.com**  
+**Architecture: https://fanrows.com/architecture**
+
+---
+
 ⚠️ The FanRows source code is currently not publicly available. This repository documents the system architecture and interaction model.
 
 ## Overview
@@ -27,12 +34,6 @@ Core components include:
 Together these components form a closed feedback loop between body movement and sound space.
 
 FanRows runs entirely in the browser and is designed as a research-oriented interaction framework.
-
----
-
-## Project Website
-Learn more at:  
-**https://fanrows.com**
 
 ---
 

@@ -11,11 +11,13 @@ Learn more at:
 
 ## Overview
 
-FanRows is an experimental browser-based system for embodied interaction with sound environments.
+FanRows is a web-based studio for embodied resonance rooms: interactive sound and movement spaces where body motion shapes sound, visuals, and spatial experience in real time.
 
-Using webcam-based motion tracking, body posture and movement dynamics continuously regulate a layered sound environment. Instead of triggering sounds through discrete gestures, participants navigate and reshape an evolving sonic space through sustained body motion.
+The system combines webcam-based motion tracking, MediaPipe, Web Audio, Tone.js, visual feedback, and configurable scene logic to create responsive sound environments in the browser.
 
-The project explores how continuous body–sound coupling can enable new forms of musical interaction and embodied exploration.
+Rather than using gestures as simple commands, FanRows treats posture, movement dynamics, stillness, and spatial presence as continuous signals. These signals regulate layered audio, effects, scenes, and visual responses without interrupting the flow of interaction.
+
+Participants navigate an evolving sonic space through sustained movement and embodied feedback. FanRows explores how continuous body–sound coupling can open new forms of musical interaction, creative technology, and responsive audiovisual experience.
 
 ## Continuous Embodied Audio Interaction in the Browser
 
@@ -29,7 +31,12 @@ Core components include:
 - continuous motion feature extraction  
 - state-based regulation logic  
 - layered audio environments  
-- scene-based interaction spaces  
+- scene-based interaction spaces
+- embodied resonance rooms
+- interactive sound and movement spaces
+- motion tracking audio
+- Web Audio / Tone.js
+- MediaPipe-based pose tracking
 
 Together these components form a closed feedback loop between body movement and sound space.
 

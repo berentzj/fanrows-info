@@ -572,212 +572,81 @@ E --> F
 
 ## JSON Configuration Schema
 
-Example configuration structure for a session:
+Sessions are stored as JSON. The following small version-1 example illustrates a
+scene material, an authored body signal, a response, and scene text. It is not
+an exhaustive specification. Replace the audio placeholder with a file that
+you own or are explicitly allowed to redistribute, and verify that the file
+is actually present in your deployment.
 
 ```json
 {
-  "stackName": "Echo Chamber",
-  "stackBpm": "78",
-  "globalSceneSwitchPose": {
-    "pose": "armsCrossed",
-    "holdTime": 1300,
-    "graceMs": 250,
-    "cooldownMs": 1300
-  },
-
-  "visual": {
-    "imageBasePath": "/posePreviews/butoh/",
-    "mode": "both",
-    "background": "video",
-    "backgroundSource": "/posePreviews/butoh/background-lake.mp4",
-    "headless": false,
-
-    "pointSize": 6,
-    "lineWidth": 5,
-    "jointColor": "rgba(75,75,120,0.7)",
-    "boneColor": "rgba(75,75,120,0.5)",
-    "maskColor": "rgba(200,200,200,0.7)",
-
-    "drawTorso": false,
-    "bodyFillColor": "rgba(175,75,200,0.55)",
-
-    "drawFace": true,
-    "faceStyle": "butoh",
-    "faceColor": "rgba(230,230,255,0.5)",
-    "drawPose": true,
-    "drawHands": true
-  },
-
+  "schemaVersion": 1,
+  "id": "example-session",
+  "stackName": "Example Session",
+  "stackBpm": 80,
+  "masterVolume": 0.75,
+  "bodySignals": [
+    {
+      "id": "left-arm-lift",
+      "label": "Left Arm Lift",
+      "sources": ["leftArmElevation"],
+      "range": [34, 86],
+      "smoothing": 0.85
+    }
+  ],
   "scenes": [
-
     {
-      "id": "birth",
-      "name": "Birth from stillness",
-      "poseGuide": "/posePreviews/butoh/trainer.mp4",
-      "background": {
-        "type": "video",
-        "src": "/posePreviews/butoh/background-lake.mp4"
+      "id": "opening",
+      "name": "Opening",
+      "loops": {
+        "bed": {
+          "name": "Ambient Bed",
+          "file": "/approvedAudio/your-own-loop.ogg",
+          "type": "loop",
+          "startMode": "auto",
+          "volume": 0.6
+        }
       },
       "visualConfig": {
         "sceneText": {
-          "content": "Follow the motion of the guide\n in the small window.",
-          "fadeIn": 3.0,
-          "hold": 10.0,
-          "fadeOut": 2.0,
-          "color": "rgba(0,0,64,0.85)",
-          "fontSize": 38,
-          "fontFamily": "times",
-          "fontWeight": "normal",
-          "align": "left",
-          "position": "top"
+          "pages": ["Move slowly.\\nNotice the sound."],
+          "position": "bottom",
+          "fontSize": 31,
+          "color": "#ffffff"
         }
       },
-      "angleEffectMappings": [
-        {
-          "joint": "leftShoulderAngle",
-          "loop": "birth_base",
-          "target": "reverb.wet",
-          "min": 0,
-          "max": 1
-        },
-        {
-          "joint": "rightShoulderAngle",
-          "loop": "ambient-leftArmVShapeDown",
-          "target": "pan.pan",
-          "min": -1,
-          "max": 1
-        }
-      ],
-      "loops": {
-        "birth_base": {
-          "file": "/splice/Piano/BPE_120_piano_loop_walk_Cmin.ogg",
-          "type": "loop",
-          "autoRun": true,
-          "autoMute": true,
-          "fadeInTime": 1.0,
-          "fadeOutTime": 10.0
-        },
-        "birth_rightHandAboveHead": {
-          "file": "/splice/Piano/SC_IP_piano_grand_arp_ascending_Cmin.ogg",
-          "pose": "rightHandAboveHead",
-          "type": "oneShot"
-        },
-        "birth_leftHandAboveHead": {
-          "file": "/splice/Piano/BPM140_Cm_Gloomy_Piano.ogg",
-          "pose": "leftHandAboveHead",
-          "type": "oneShot"
-        },
-        "birth_rightArmTShape": {
-          "file": "/splice/Piano/BPE_piano_deer_Cmin.ogg",
-          "pose": "rightArmTShape",
-          "type": "oneShot"
-        },
-        "birth_leftArmTShape": {
-          "file": "/splice/Piano/BPE_piano_fall_Cmin.ogg",
-          "pose": "leftArmTShape",
-          "type": "oneShot"
-        }
-      }
-    },
-
-    {
-      "id": "body",
-      "name": "Recognition of body and breath",
-      "background": {
-        "type": "video",
-        "src": "/posePreviews/butoh/background-birds.mp4"
-      },
-      "visualConfig": {
-        "sceneText": {
-          "content": "Now you are on your own.",
-          "fadeIn": 3.0,
-          "hold": 10.0,
-          "fadeOut": 2.0,
-          "color": "rgba(0,0,64,0.85)",
-          "fontSize": 38,
-          "fontFamily": "times",
-          "fontWeight": "normal",
-          "align": "left",
-          "position": "top"
-        }
-      },
-      "loops": {
-        "body_base": {
-          "file": "/splice/Piano/SC_IP_60_piano_grand_arrangement_romantico_pt_c_Ebmaj.ogg",
-          "type": "loop",
-          "autoRun": true,
-          "autoMute": true,
-          "fadeInTime": 1.0,
-          "fadeOutTime": 10.0
-        },
-        "body_rightHandAboveHead": {
-          "file": "/splice/Cello/PJ_PPLII_Strings_one_shot_Rising_Cello_Ensemble_Chord_Dsmaj.ogg",
-          "pose": "rightHandAboveHead",
-          "type": "oneShot"
-        },
-        "body_leftHandAboveHead": {
-          "file": "/splice/Strings/SLS_ES_synth_pad_string_strum_layered_long_chord_loving_you_Ebmaj7.ogg",
-          "pose": "leftHandAboveHead",
-          "type": "oneShot"
-        },
-        "body_rightArmTShape": {
-          "file": "/splice/Flute/SO_AA_113_flute_love_Ebmaj.ogg",
-          "pose": "rightArmTShape",
-          "type": "loop",
-          "fadeInTime": 1.2,
-          "fadeOutTime": 10.0
-        },
-        "body_leftArmTShape": {
-          "file": "/splice/Flute/SO_TA_102_synth_flute_cabo_Ebmaj.ogg",
-          "pose": "leftArmTShape",
-          "type": "loop",
-          "fadeInTime": 1.2,
-          "fadeOutTime": 10.0
-        }
-      }
-    },
-
-    {
-      "id": "release",
-      "name": "Release and transformation",
-      "background": {
-        "type": "video",
-        "src": "/posePreviews/butoh/background-sun.mp4"
-      },
-      "loops": {
-        "release_base": {
-          "file": "/splice/Piano/SC_IP_120_piano_grand_arrangement_lucid_chords_two_Cmin.ogg",
-          "type": "loop",
-          "autoRun": true,
-          "autoMute": true,
-          "fadeInTime": 1.0,
-          "fadeOutTime": 10.0
-        },
-        "release_rightHandAboveHead": {
-          "file": "/splice/Vocals/SS_VMT_124_vocal_reflex_adlib_long_reverb_Cmin.ogg",
-          "pose": "rightHandAboveHead",
-          "type": "oneShot"
-        },
-        "release_leftHandAboveHead": {
-          "file": "/splice/Vocals/SS_VMT_124_vocal_sacrifice_chorus_adlibs_wet_Fmin.ogg",
-          "pose": "leftHandAboveHead",
-          "type": "oneShot"
-        },
-        "release_rightArmTShape": {
-          "file": "/splice/Strings/MNT_SDHJ_90_strings_violin_legato_intro_alt_wet_Cm.ogg",
-          "pose": "rightArmTShape",
-          "type": "oneShot"
-        },
-        "release_leftArmTShape": {
-          "file": "/splice/Strings/MNT_TOG_80_violin_texture_intimate_tremolo_swells_wet_Cm.ogg",
-          "pose": "leftArmTShape",
-          "type": "oneShot"
-        }
+      "sceneIntent": {
+        "responses": [
+          {
+            "id": "opening-filter",
+            "signalId": "left-arm-lift",
+            "materialId": "bed",
+            "changeType": "filter_open",
+            "depth": 0.5,
+            "config": {
+              "min": 300,
+              "max": 2600,
+              "tauUpSec": 0.6,
+              "tauDownSec": 1.2
+            }
+          }
+        ]
       }
     }
   ]
 }
 ```
+
+The placeholder audio path is **not** a bundled file. A structurally valid
+session is not proof that an audio URL exists, plays, or may legally be
+distributed. Older projects may retain additional fields for compatibility;
+their presence does not mean those fields are recommended for new sessions.
+
+## Example Session
+
+The JSON above is the current compact example. Studio can author many more
+settings for visuals, effects, timing, and interaction; those are intentionally
+not implied by this minimal example.
 
 ## Future Development
 

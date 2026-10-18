@@ -609,7 +609,7 @@ is actually present in your deployment.
       },
       "visualConfig": {
         "sceneText": {
-          "pages": ["Move slowly.\\nNotice the sound."],
+          "pages": ["Move slowly.\nNotice the sound."],
           "position": "bottom",
           "fontSize": 31,
           "color": "#ffffff"
